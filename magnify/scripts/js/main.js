@@ -69,6 +69,8 @@ var images = [
     // PATH + "textures/IMG_5470.jpg",
     // PATH + "textures/IMG_5474.jpg",
     PATH + "textures/info.jpg",
+    PATH + "textures/clouds.jpg",
+
     // PATH + "textures/IMG_5501.jpg",
     // PATH + "textures/IMG_5587.jpg",
     // PATH + "textures/IMG_6373.jpg",
@@ -218,7 +220,7 @@ function createMultipassMaterial(){
         "resolution": renderSize,
         "time": 0.0
     }
-    mMaterial = new MultipassMaterial(renderer, scene, camera2, textures[0], shaders);
+    mMaterial = new MultipassMaterial(renderer, scene, camera2, textures[1], shaders);
     mMaterial.init();
     mMaterial.setUniforms(uniforms);
 
@@ -231,7 +233,7 @@ function createMultipassMaterial(){
     mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
     mesh.position.z = 0;
-    for(var i = 0; i < textures.length; i++){
+    for(var i = 0; i < 1; i++){
         texturePlanes[i] = new TexturePlane(scene, camera, renderer, textures[i], Math.random())
         texturePlanes[i].init();
     }
