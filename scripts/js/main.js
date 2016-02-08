@@ -34,6 +34,7 @@ var images = [
     // PATH + "textures/IMG_3839.jpg",
     // PATH + "textures/IMG_3954.jpg",
     // PATH + "textures/IMG_4236.jpg",
+    // PATH + "textures/IMG_4180.jpg",
     // PATH + "textures/IMG_4336.jpg",
     // PATH + "textures/IMG_4380.jpg",
     // PATH + "textures/IMG_4404.jpg",
@@ -43,26 +44,46 @@ var images = [
     // PATH + "textures/IMG_4608.jpg",
     // PATH + "textures/IMG_4616.jpg",
     // PATH + "textures/IMG_4691.jpg",
+    // PATH + "textures/IMG_4684.jpg",
     // PATH + "textures/IMG_4742.jpg",
     // PATH + "textures/IMG_4745.jpg",
     // PATH + "textures/IMG_4779.jpg",
     // PATH + "textures/IMG_4816.jpg",
     // PATH + "textures/IMG_4857.jpg",
+    // PATH + "textures/IMG_4880.jpg",
     // PATH + "textures/IMG_4890.jpg",
     // PATH + "textures/IMG_4921.jpg",
     // PATH + "textures/IMG_4942.jpg",
+    // PATH + "textures/IMG_6706.jpg",
+    PATH + "textures/IMG_6797.JPG",
     // PATH + "textures/IMG_4953.jpg",
     // PATH + "textures/IMG_4988.jpg",
     // PATH + "textures/IMG_5009.jpg",
     // PATH + "textures/IMG_5126.jpg",
+    // PATH + "textures/IMG_5216.jpg",
+    // PATH + "textures/IMG_5408.jpg",
     // PATH + "textures/IMG_5413.jpg",
     // PATH + "textures/IMG_5470.jpg",
     // PATH + "textures/IMG_5474.jpg",
     // PATH + "textures/clouds.jpg",
     // PATH + "textures/IMG_5501.jpg",
+    // PATH + "textures/IMG_5520.jpg",
+    // PATH + "textures/IMG_5555.jpg",
     // PATH + "textures/IMG_5587.jpg",
     // PATH + "textures/IMG_6373.jpg",
-    PATH + "textures/dogs.png",
+    // PATH + "textures/IMG_6334.jpg",
+    // PATH + "textures/IMG_5570.jpg",
+    // PATH + "textures/IMG_6465.jpg",
+    // PATH + "textures/IMG_6405.jpg",
+    // PATH + "textures/IMG_6509.JPG",
+    // PATH + "textures/IMG_6512.JPG",
+    // PATH + "textures/IMG_6559.JPG",
+    // PATH + "textures/IMG_6561.JPG",
+    // PATH + "textures/IMG_6457.jpg",
+    // PATH + "textures/IMG_6482.jpg",
+    // PATH + "textures/IMG_6488.jpg",
+    // PATH + "textures/IMG_6513.jpg",
+    // PATH + "textures/dogs.png",
 ]
 var capturer = new CCapture( { framerate: 60, format: 'webm', workersPath: 'js/' } );
 var screensaver;
@@ -96,7 +117,11 @@ function init() {
     // camera = new THREE.Camera();
     camera = new THREE.OrthographicCamera( renderSize.x / - 2, renderSize.x / 2, renderSize.y / 2, renderSize.y / - 2, -100000, 100000 );
     // camera = new THREE.PerspectiveCamera( 45, renderSize.x/renderSize.y, 0.001, 100000 );
-    camera.position.z = 1800;
+    // camera.position.z = 2100;
+    // camera.position.z = 2500;
+    // camera.position.z = 2800;
+    camera.position.z = 3600;
+    // camera.position.z = 3100;
     // camera.position.z = 1629.0124999999796;
     // camera.position.z = 1547.5618749999876;
     camera2 = new THREE.Camera();
@@ -106,8 +131,23 @@ function init() {
 
     container.appendChild(renderer.domElement);
 
+    // video = document.createElement( 'video' );
+    // video.muted = true;
+    // navigator.getUserMedia  = navigator.getUserMedia ||
+              // navigator.webkitGetUserMedia ||
+              // navigator.mozGetUserMedia ||
+              // navigator.msGetUserMedia;
+// 
+    // navigator.getUserMedia({audio:false, video:true}, function(stream){
+        // video.src = window.URL.createObjectURL(stream);
+        // video.play();
+    // }, function(err){
+        // console.log(err);
+    // });
+    // videoTexture = new THREE.Texture(video)
+    // videoTexture.minFilter = videoTexture.magFilter = THREE.NearestFilter;
     loadTextures();
-
+// createScreensaver();
     debounceResize = debounce(onWindowResize, 250);
     window.addEventListener("resize", debounceResize);
     document.addEventListener("mousemove", onMouseMove);
@@ -159,24 +199,27 @@ function createMultipassMaterial(){
         "time": 0.0
     }
     mMaterial = new MultipassMaterial(renderer, scene, camera2, textures[0], shaders);
+    // mMaterial = new MultipassMaterial(renderer, scene, camera2, videoTexture, shaders);
     mMaterial.init();
     mMaterial.setUniforms(uniforms);
 
-    // geometry = new THREE.PlaneGeometry(renderSize.x*1.0, renderSize.y*1.0);
-    // material = new THREE.MeshBasicMaterial({
-        // map: textures[0],
-        // //map: mMaterial.buffers[2].renderTarget,
-        // side: THREE.DoubleSide
-    // })
-    // mesh = new THREE.Mesh(geometry, material);
-    // scene.add(mesh);
-    // mesh.position.z = 0;
-    for(var i = 0; i < textures.length; i++){
-        texturePlanes[i] = new TexturePlane(scene, camera, renderer, textures[i], Math.random())
-        texturePlanes[i].init();
-    }
-    screensaver.refractionPlaneMaterial.uniforms["map"].value = mMaterial.buffers[2].renderTarget;
-    // screensaver.refractionPlaneMaterial.uniforms["map"].value = textures[1];
+    geometry = new THREE.PlaneGeometry(renderSize.x*1.0, renderSize.y*1.0);
+    material = new THREE.MeshBasicMaterial({
+        map: textures[0],
+        // map: mMaterial.buffers[2].renderTarget,
+        side: THREE.DoubleSide
+    })
+    mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+    mesh.position.z = 0;
+    // for(var i = 0; i < textures.length; i++){
+        // texturePlanes[i] = new TexturePlane(scene, camera, renderer, textures[i], Math.random())
+        // texturePlanes[i].init();
+    // }
+    // screensaver.refractionPlaneMaterial.uniforms["map"].value = mMaterial.buffers[2].renderTarget;
+    screensaver.refractionPlaneMaterial.uniforms["map"].value = textures[0];
+            // capturer.start();
+
 
     animate();
 }
@@ -189,6 +232,7 @@ function draw() {
    
     time += 0.01;    
 
+    // videoTexture.needsUpdate = true;
     screensaver.update();
 
     screensaver.refractionPlane.visible = false;
@@ -198,17 +242,17 @@ function draw() {
 
     //Render the scene
     screensaver.refractionPlane.visible = true;
-    for(var i = 0; i < texturePlanes.length; i++){
-        texturePlanes[i].update();
-    }
+    // for(var i = 0; i < texturePlanes.length; i++){
+        // texturePlanes[i].update();
+    // }
 
     uniforms["time"] = time;    
     uniforms["FRAME"] += 1.0;    
-    uniforms["mouse"].x = mouse.x;
-    // uniforms["mouse"].x = 0.001388888888888884;
+    // uniforms["mouse"].x = mouse.x;
+    uniforms["mouse"].x = 0.1001388888888888884;
     // uniforms["mouse"].x = Math.sin(time)*0.1;
-    uniforms["mouse"].y = mouse.y;
-    // uniforms["mouse"].y = 0.35686274509803917; 
+    // uniforms["mouse"].y = mouse.y;
+    uniforms["mouse"].y = 0.135686274509803917;
     // uniforms["mouse"].y = Math.cos(time)*0.1;
 
     // screensaver.refractionPlaneMaterial.uniforms["map"].value = mMaterial.buffers[2].renderTarget;
@@ -260,8 +304,10 @@ function onWindowResize(event) {
 }
 
 function setRenderSize(){
-    renderSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
+    // renderSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
     // renderSize = new THREE.Vector2((window.innerHeight*2448)/3246, window.innerHeight);
+    renderSize = new THREE.Vector2(window.innerHeight, window.innerHeight);
+    // renderSize = new THREE.Vector2(window.innerWidth, (window.innerWidth*2448)/3246);
     // renderSize = new THREE.Vector2(window.innerWidth, (window.innerWidth*3246)/2448);
 }
 function debounce(func, wait, immediate) {

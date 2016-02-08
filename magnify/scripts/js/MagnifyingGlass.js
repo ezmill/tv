@@ -39,7 +39,7 @@ function MagnifyingGlass(SCENE, CAMERA, RENDERER, TEXTURES){
 			side: THREE.DoubleSide
 		});
 		this.refractionPlaneMaterial.uniforms["envMap"].value = this.cubeCamera.renderTarget;
-		this.refractionPlaneMaterial.uniforms["alpha"].value = textures[0];
+		// this.refractionPlaneMaterial.uniforms["alpha"].value = textures[0];
 		// this.refractionPlaneMaterial.uniforms["map"].value = THREE.ImageUtils.loadTexture(PATH + "textures/8069-3000x3000-seamless-white-foam-water-texture-image-2-1559.png");
 		// this.refractionPlaneMaterial.uniforms["map"].value = textures[0];
 

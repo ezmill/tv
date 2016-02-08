@@ -233,10 +233,10 @@ function createMultipassMaterial(){
     mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
     mesh.position.z = 0;
-    for(var i = 0; i < 1; i++){
-        texturePlanes[i] = new TexturePlane(scene, camera, renderer, textures[i], Math.random())
-        texturePlanes[i].init();
-    }
+    // for(var i = 0; i < 1; i++){
+        // texturePlanes[i] = new TexturePlane(scene, camera, renderer, textures[i], Math.random())
+        // texturePlanes[i].init();
+    // }
     magnifyingGlass.refractionPlaneMaterial.uniforms["map"].value = mMaterial.buffers[2].renderTarget;
     // screensaver.refractionPlaneMaterial.uniforms["map"].value = textures[1];
 
@@ -254,28 +254,28 @@ function draw() {
     magnifyingGlass.update();
 
     magnifyingGlass.refractionPlane.visible = false;
-    texturePlanes[0].mesh.visible = true;
-    mesh.visible = false;
+    // texturePlanes[0].mesh.visible = true;
+    // mesh.visible = false;
     magnifyingGlass.cubeCamera.position.copy( new THREE.Vector3(METAL.position.x, METAL.position.y, (METAL.position.z - 50))  );
     // screensaver.cubeCamera.position.copy( new THREE.Vector3(0,0,999) );
     magnifyingGlass.cubeCamera.updateCubeMap( renderer, scene );
 
     //Render the scene
     magnifyingGlass.refractionPlane.visible = true;
-    texturePlanes[0].mesh.visible = false;
-    mesh.visible = true;
+    // texturePlanes[0].mesh.visible = false;
+    // mesh.visible = true;
 
-    for(var i = 0; i < texturePlanes.length; i++){
-        texturePlanes[i].update();
-    }
+    // for(var i = 0; i < texturePlanes.length; i++){
+        // texturePlanes[i].update();
+    // }
 
     uniforms["time"] = time;    
     uniforms["FRAME"] += 1.0;    
-    uniforms["mouse"].x = mouse.x;
-    // uniforms["mouse"].x = 0.001388888888888884;
+    // uniforms["mouse"].x = mouse.x;
+    uniforms["mouse"].x = 0.001388888888888884;
     // uniforms["mouse"].x = Math.sin(time)*0.1;
-    uniforms["mouse"].y = mouse.y;
-    // uniforms["mouse"].y = 0.35686274509803917; 
+    // uniforms["mouse"].y = mouse.y;
+    uniforms["mouse"].y = 0.35686274509803917; 
     // uniforms["mouse"].y = Math.cos(time)*0.1;
 
     // screensaver.refractionPlaneMaterial.uniforms["map"].value = mMaterial.buffers[2].renderTarget;

@@ -6,8 +6,8 @@ function TexturePlane(SCENE, CAMERA, RENDERER, TEXTURE, SPEED){
 	this.speed = SPEED;
 
 	this.init = function(){
-		// this.geometry = new THREE.PlaneGeometry(this.texture.image.width/10, this.texture.image.height/10);
-		this.geometry = new THREE.PlaneGeometry(this.texture.image.width, this.texture.image.height);
+		this.geometry = new THREE.PlaneGeometry(this.texture.image.width/4, this.texture.image.height/4);
+		// this.geometry = new THREE.PlaneGeometry(this.texture.image.width, this.texture.image.height);
 		// this.geometry = new THREE.PlaneGeometry(renderSize.x, renderSize.y);
 		this.material = new THREE.MeshBasicMaterial({
 			map: this.texture,

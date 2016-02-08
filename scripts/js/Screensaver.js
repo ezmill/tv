@@ -20,7 +20,7 @@ function Screensaver(SCENE, CAMERA, RENDERER, TEXTURES){
 
 
 
-		this.refractionPlaneGeometry = new THREE.PlaneGeometry(renderSize.x*1.1, renderSize.y*1.1, 500, 500);
+		this.refractionPlaneGeometry = new THREE.PlaneGeometry(renderSize.x*1.2, renderSize.y*1.2, 500, 500);
 		// this.refractionPlaneGeometry = new THREE.SphereGeometry(500,250,250);
 		// this.refractionPlaneGeometry = new THREE.IcosahedronGeometry(500,4);
 		this.refractionPlaneGeometry.mergeVertices();
@@ -39,6 +39,7 @@ function Screensaver(SCENE, CAMERA, RENDERER, TEXTURES){
 		});
 		this.refractionPlaneMaterial.uniforms["envMap"].value = this.cubeCamera.renderTarget;
 		this.refractionPlaneMaterial.uniforms["alpha"].value = textures[0];
+		this.refractionPlaneMaterial.uniforms["refractionMap"].value = THREE.ImageUtils.loadTexture(PATH + "textures/smoothnoise.png");
 		// this.refractionPlaneMaterial.uniforms["map"].value = THREE.ImageUtils.loadTexture(PATH + "textures/8069-3000x3000-seamless-white-foam-water-texture-image-2-1559.png");
 		// this.refractionPlaneMaterial.uniforms["map"].value = textures[0];
 
@@ -67,7 +68,8 @@ function Screensaver(SCENE, CAMERA, RENDERER, TEXTURES){
 		// }
 		this.refractionPlane.geometry.verticesNeedUpdate = true;
 
-		// this.refractionPlane.rotation.x += 0.01;
+		this.refractionPlane.rotation.x = Math.cos(time*0.5)*0.075;
+		this.refractionPlane.rotation.y = Math.sin(time*0.5)*0.075;
 	}
 
 

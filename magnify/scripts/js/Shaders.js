@@ -296,7 +296,7 @@ var BShader = function(){
             "varying vec2 vUv;",
             "void main()",
             "{",
-            "    const float ds = 0.4; // diffusion rate",
+            "    const float ds = 0.2; // diffusion rate",
             "    const float darken = 0.0; // darkening",
             "    const float D1 = 0.2;  // edge neighbors",
             "    const float D2 = 0.05; // vertex neighbors",
