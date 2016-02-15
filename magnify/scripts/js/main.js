@@ -103,7 +103,8 @@ function init() {
     scene = new THREE.Scene();
 
     renderer = new THREE.WebGLRenderer({
-        preserveDrawingBuffer: true
+        preserveDrawingBuffer: true,
+        antialias: true
     });
     renderer.setSize(renderSize.x, renderSize.y);
     renderer.setClearColor(0xffffff, 1.0);

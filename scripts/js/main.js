@@ -14,6 +14,7 @@ var renderTarget;
 var textures = [];
 var loadedItems = 0;
 var loader = new THREE.TextureLoader();
+var FRAME = 0;
 var images = [
     // PATH + "textures/IMG_3225.jpg",
     // PATH + "textures/IMG_3262.jpg",
@@ -55,7 +56,8 @@ var images = [
     // PATH + "textures/IMG_4921.jpg",
     // PATH + "textures/IMG_4942.jpg",
     // PATH + "textures/IMG_6706.jpg",
-    PATH + "textures/IMG_6797.JPG",
+    // PATH + "textures/IMG_6797.JPG",
+    PATH + "textures/tlop.jpg",
     // PATH + "textures/IMG_4953.jpg",
     // PATH + "textures/IMG_4988.jpg",
     // PATH + "textures/IMG_5009.jpg",
@@ -98,8 +100,15 @@ var urls = [
 ]
 var testCube = new THREE.CubeTexture(urls, THREE.CubeRefractionMapping);
 var texturePlanes = [];
+var audio = new Audio();
+audio.src = PATH + "fsmh.m4a";
+audio.load();
+// audio.onload = function(){
+    init();
+// }
+audio.play();
 // var testCube = testCubeLoader.load(urls, function(){
-    init();    
+    // init();    
 // });
 
 
@@ -113,14 +122,15 @@ function init() {
         preserveDrawingBuffer: true
     });
     renderer.setSize(renderSize.x, renderSize.y);
-    renderer.setClearColor(0xffffff, 1.0);
+    renderer.setClearColor(0xf78c58, 1.0);
     // camera = new THREE.Camera();
     camera = new THREE.OrthographicCamera( renderSize.x / - 2, renderSize.x / 2, renderSize.y / 2, renderSize.y / - 2, -100000, 100000 );
     // camera = new THREE.PerspectiveCamera( 45, renderSize.x/renderSize.y, 0.001, 100000 );
     // camera.position.z = 2100;
     // camera.position.z = 2500;
     // camera.position.z = 2800;
-    camera.position.z = 3600;
+    camera.position.z = 3000;
+    // camera.position.z = 2932.2224999999908;
     // camera.position.z = 3100;
     // camera.position.z = 1629.0124999999796;
     // camera.position.z = 1547.5618749999876;
@@ -203,10 +213,10 @@ function createMultipassMaterial(){
     mMaterial.init();
     mMaterial.setUniforms(uniforms);
 
-    geometry = new THREE.PlaneGeometry(renderSize.x*1.0, renderSize.y*1.0);
+    geometry = new THREE.PlaneGeometry(renderSize.y*1.0, renderSize.y*1.0);
     material = new THREE.MeshBasicMaterial({
-        map: textures[0],
-        // map: mMaterial.buffers[2].renderTarget,
+        // map: textures[0],
+        map: mMaterial.buffers[2].renderTarget,
         side: THREE.DoubleSide
     })
     mesh = new THREE.Mesh(geometry, material);
@@ -245,14 +255,21 @@ function draw() {
     // for(var i = 0; i < texturePlanes.length; i++){
         // texturePlanes[i].update();
     // }
-
+    // FRAME += 1;
     uniforms["time"] = time;    
-    uniforms["FRAME"] += 1.0;    
+    // uniforms["FRAME"] = FRAME;
+    if(audio.currentTime > 34.0){
+        uniforms["FRAME"] = 1.0;
+        screensaver.refractionPlaneMaterial.uniforms["FRAME"].value = 1.0;
+
+        // screensaver.refractionPlane.rotation.x = Math.cos(time*4.0)*0.05;
+        screensaver.refractionPlane.rotation.y = Math.sin(time*4.0)*0.1;
+    }
     // uniforms["mouse"].x = mouse.x;
-    uniforms["mouse"].x = 0.1001388888888888884;
+    uniforms["mouse"].x = 0.0001388888888888884;
     // uniforms["mouse"].x = Math.sin(time)*0.1;
     // uniforms["mouse"].y = mouse.y;
-    uniforms["mouse"].y = 0.135686274509803917;
+    uniforms["mouse"].y = 0.35686274509803917;
     // uniforms["mouse"].y = Math.cos(time)*0.1;
 
     // screensaver.refractionPlaneMaterial.uniforms["map"].value = mMaterial.buffers[2].renderTarget;
@@ -304,9 +321,9 @@ function onWindowResize(event) {
 }
 
 function setRenderSize(){
-    // renderSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
+    renderSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
     // renderSize = new THREE.Vector2((window.innerHeight*2448)/3246, window.innerHeight);
-    renderSize = new THREE.Vector2(window.innerHeight, window.innerHeight);
+    // renderSize = new THREE.Vector2(window.innerHeight, window.innerHeight);
     // renderSize = new THREE.Vector2(window.innerWidth, (window.innerWidth*2448)/3246);
     // renderSize = new THREE.Vector2(window.innerWidth, (window.innerWidth*3246)/2448);
 }
