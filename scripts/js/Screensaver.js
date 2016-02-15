@@ -51,7 +51,7 @@ function Screensaver(SCENE, CAMERA, RENDERER, TEXTURES){
 		this.refractionPlane = new THREE.Mesh(this.refractionPlaneGeometry, this.refractionPlaneMaterial);
 		this.scene.add(this.refractionPlane);
 		this.refractionPlane.position.z = 1500;
-		// this.refractionPlane.rotation.y += 0.05;
+		this.refractionPlane.visible = false;
 
 	}
 

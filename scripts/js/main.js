@@ -107,6 +107,7 @@ audio.load();
     init();
 // }
 audio.play();
+audio.currentTime = 30.0;
 // var testCube = testCubeLoader.load(urls, function(){
     // init();    
 // });
@@ -251,7 +252,7 @@ function draw() {
     screensaver.cubeCamera.updateCubeMap( renderer, scene );
 
     //Render the scene
-    screensaver.refractionPlane.visible = true;
+    // screensaver.refractionPlane.visible = true;
     // for(var i = 0; i < texturePlanes.length; i++){
         // texturePlanes[i].update();
     // }
@@ -262,15 +263,17 @@ function draw() {
         uniforms["FRAME"] = 1.0;
         screensaver.refractionPlaneMaterial.uniforms["FRAME"].value = 1.0;
 
-        // screensaver.refractionPlane.rotation.x = Math.cos(time*4.0)*0.05;
-        screensaver.refractionPlane.rotation.y = Math.sin(time*4.0)*0.1;
+        screensaver.refractionPlane.rotation.x = Math.cos(time*2.0)*0.1;
+        screensaver.refractionPlane.rotation.y = Math.sin(time*2.0)*0.1;
+        mesh.rotation.x = Math.cos(time*2.0)*0.1;
+        mesh.rotation.y = Math.sin(time*2.0)*0.1;
     }
     // uniforms["mouse"].x = mouse.x;
-    uniforms["mouse"].x = 0.0001388888888888884;
-    // uniforms["mouse"].x = Math.sin(time)*0.1;
+    // uniforms["mouse"].x = 0.0001388888888888884;
+    uniforms["mouse"].x = Math.cos(time*2.0)*0.0001388888888888884;
     // uniforms["mouse"].y = mouse.y;
-    uniforms["mouse"].y = 0.35686274509803917;
-    // uniforms["mouse"].y = Math.cos(time)*0.1;
+    // uniforms["mouse"].y = 0.35686274509803917;
+    uniforms["mouse"].y = Math.sin(time*2.0)*0.35686274509803917;
 
     // screensaver.refractionPlaneMaterial.uniforms["map"].value = mMaterial.buffers[2].renderTarget;
 

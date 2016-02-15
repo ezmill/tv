@@ -11,7 +11,7 @@ var RefractionShader = function(){
         "FRAME": { type: "f", value: 0.0 },
         "noiseScale":{type: "f", value:0.0},
         "noiseDetail":{type: "f", value:0.0},
-        "refractionRatio":{type: "f", value:0.95},
+        "refractionRatio":{type: "f", value:0.99},
         "diffuse":{type: "v3", value:new THREE.Vector3(1.0,1.0,1.0)},
         "reflectivity":{type: "f", value:1.0},
         "mouse":{type: "v2", value:null}
@@ -41,10 +41,11 @@ var RefractionShader = function(){
             "   vUv = uv;",
             "   vec4 color = texture2D(map, vUv);",
             // "   float depth = smoothstep(0.499,0.501,( color.r + color.g + color.b ) / 3.0);",
-            "   float depth = ( color.r + color.g + color.b ) / 3.0;",
+            "   float depth = luminance(color.rgb);",
+            // "   float depth = ( color.r + color.g + color.b ) / 3.0;",
             "   float z = ( depth*2.0 - 1.0 ) * (4500.0 - 800.0) + 800.0;",
 
-            "   vec3 pos = vec3(position.x, position.y, z*0.05);",
+            "   vec3 pos = vec3(position.x, position.y, z*0.01);",
             // "   vec3 pos = vec3(position.x, position.y, sin(time+uv.x)*z*0.1);",
             // "   vec3 pos = vec3(position.x, position.y, position.z + sin(time*10.0 + position.x*0.1)*100.0);",
             // "   vec3 pos = vec3(position.x, position.y, z*sin(time*10.0 + z)*0.1);",
@@ -104,9 +105,9 @@ var RefractionShader = function(){
             // "   gl_FragColor = vec4( outgoingLight, diffuseColor.a );"
             "   vec4 s = texture2D(map, vUv);",,
             "   vec4 t = vec4( outgoingLight, diffuseColor.a );",
-            "   vec4 col = mix(t, s, dot(t.rgb, vec3(1.0)/3.0));",
+            "   vec4 col = mix(t, s, dot(t.rgb, vec3(247.0/255.0, 140.0/255.0, 88.0/255.0)/3.0));",
 
-            "        gl_FragColor = col;",
+            "        gl_FragColor = t;",
             "    }",
             // "   gl_FragColor = vec4( 1.0, 0.0,0.0,1.0 );",
             // "   vec4 col = mix(s, alpha,  dot(s.rgb, vec3(1.0)/3.0));",
