@@ -57,7 +57,7 @@ var images = [
     // PATH + "textures/IMG_4942.jpg",
     // PATH + "textures/IMG_6706.jpg",
     // PATH + "textures/IMG_6797.JPG",
-    PATH + "textures/tlop.jpg",
+    PATH + "textures/1280x1280.jpg",
     // PATH + "textures/IMG_4953.jpg",
     // PATH + "textures/IMG_4988.jpg",
     // PATH + "textures/IMG_5009.jpg",
